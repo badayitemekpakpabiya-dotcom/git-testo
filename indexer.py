@@ -1,4 +1,4 @@
-from main import nom,prenom
+from index import nom,prenom
 resultz= nom.upper()
 print(resultz+", merci de choisir notre site pour votre identification ")
 #demander s'il ou elle est marié(e)
