@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Page introuvable{% endblock %}
+{% block content %}
+<div class="form-card" style="text-align:center;">
+    <h1>404</h1>
+    <p>Cette page n'existe pas ou ce profil n'est pas encore public.</p>
+    <a href="{{ url_for('index') }}" class="btn-primary">Retour à l'accueil</a>
+</div>
+{% endblock %}

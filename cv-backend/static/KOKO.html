@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mon CV</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+
+    --paper:#F5F3EE;
+    --panel:#F8F5F1;
+    --card:#FFFFFF;
+    --ink:#1E242A;
+    --muted:#5F6C75;
+    --line:#E0D8CC;
+    --accent:#2F5D52;
+    --accent-ink:#F4FBF8;
+    --accent-2:#C9945D;
+    --danger:#B14848;
+    --focus:#2F5D52;
+    --shadow:0 18px 40px rgba(30,36,42,0.08);
+    --font-display:'Fraunces', Georgia, serif;
+    --font-body:'Inter', system-ui, -apple-system, sans-serif;
+  }
+  :root:not([data-theme="light"]){
+    @media (prefers-color-scheme: dark){
+      --paper:#171A1C;
+      --panel:#1F2326;
+      --card:#20262A;
+      --ink:#EDEDE8;
+      --muted:#9AA5AB;
+      --line:#33393D;
+      --accent:#6FA396;
+      --accent-ink:#0E1513;
+      --accent-2:#C89A6C;
+      --danger:#D98080;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#171A1C;
+    --panel:#1F2326;
+    --card:#20262A;
+    --ink:#EDEDE8;
+    --muted:#9AA5AB;
+    --line:#33393D;
+    --accent:#6FA396;
+    --accent-ink:#0E1513;
+    --accent-2:#C89A6C;
+    --danger:#D98080;
+  }
+  html{ scroll-padding-top:env(safe-area-inset-top,0px); height:100%; }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    min-height:100%;
+    background:
+      radial-gradient(circle at top left, rgba(116, 170, 156, 0.12), transparent 22%),
+      linear-gradient(180deg, #F7F4F0 0%, var(--paper) 100%);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.5;
+  }
+  header.top{
+    padding:28px clamp(16px,4vw,40px) 14px;
+    border-bottom:1px solid #333333;
+    background:
+      linear-gradient(90deg, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.88) 42%, rgba(0,0,0,0.28) 100%),
+      url("emploi-header.svg") center 56% / cover no-repeat,
+      #000000;
+    backdrop-filter:blur(8px);
+  }
+  header.top h1{
+    font-family:var(--font-display);
+    font-weight:500;
+    font-size:clamp(24px,4vw,32px);
+    margin:0 0 4px;
+    letter-spacing:-0.03em;
+    color:#FFFFFF;
+  }
+  header.top p{
+    margin:0;
+    color:#D1D5DB;
+    font-size:14px;
+    max-width:62ch;
+  }
+  .header-row{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    gap:12px;
+    align-items:end;
+  }
+  .header-row .lang-wrap{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-left:auto;
+  }
+  .header-row label{
+    margin:0;
+    font-size:11px;
+    color:#D1D5DB;
+    font-weight:600;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+  }
+  .header-row select{
+    min-width:120px;
+  }
+  .tabs{
+    display:flex;
+    gap:8px;
+    padding:10px clamp(16px,4vw,40px) 0;
+  }
+  .tabs button{
+    flex:1;
+    padding:9px 12px;
+    border-radius:8px;
+    border:1px solid var(--line);
+    background:var(--panel);
+    color:var(--muted);
+    font-family:var(--font-body);
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .tabs button.active{
+    background:var(--accent);
+    color:var(--accent-ink);
+    border-color:var(--accent);
+  }
+  @media (min-width:900px){
+    .tabs{ display:none; }
+  }
+  main{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:20px;
+    padding:16px clamp(16px,4vw,40px) 60px;
+    max-width:1400px;
+    margin:0 auto;
+  }
+  @media (min-width:900px){
+    main{ grid-template-columns:minmax(320px,440px) 1fr; align-items:start; }
+  }
+  section.panel{
+    background:var(--panel);
+    border-radius:18px;
+    padding:20px clamp(14px,3vw,28px) 26px;
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
+  }
+  section.panel.hidden, .preview-wrap.hidden{ display:none; }
+  @media (min-width:900px){
+    section.panel.hidden{ display:block; }
+  }
+  fieldset{
+    border:none;
+    margin:0 0 22px;
+    padding:0;
+  }
+  fieldset legend{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:17px;
+    padding:0 0 12px;
+    width:100%;
+    border-bottom:1px solid var(--line);
+    margin-bottom:14px;
+  }
+  fieldset legend::before{
+    content:"";
+    width:8px;
+    height:8px;
+    border-radius:3px;
+    background:linear-gradient(135deg, var(--accent-2), var(--accent));
+    flex:none;
+    box-shadow:0 0 0 4px rgba(201,148,93,0.12);
+  }
+  label{
+    display:block;
+    font-size:12.5px;
+    color:var(--muted);
+    margin:10px 0 4px;
+  }
+  label.first{ margin-top:0; }
+  input[type=text], input[type=email], input[type=tel], input[type=month], input[type=url], textarea, select{
+    width:100%;
+    padding:9px 10px;
+    border-radius:8px;
+    border:1px solid var(--line);
+    background:var(--card);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:14.5px;
+  }
+  input:focus, textarea:focus, select:focus{
+    outline:2px solid var(--focus);
+    outline-offset:1px;
+  }
+  textarea{ resize:vertical; min-height:70px; }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .phone-row{ display:grid; grid-template-columns:1fr 2fr; gap:10px; }
+  .entry{
+    background:linear-gradient(180deg, var(--card), rgba(255,255,255,0.96));
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:14px 14px 16px;
+    margin-bottom:12px;
+    box-shadow:0 8px 18px rgba(32,38,43,0.04);
+  }
+  .entry-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:8px;
+  }
+  .entry-head span{ font-size:12.5px; color:var(--muted); font-weight:600; }
+  .checkbox-row{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin-top:10px;
+    font-size:13px;
+    color:var(--muted);
+  }
+  .checkbox-row input{ width:auto; }
+  button.ghost{
+    background:none;
+    border:1px solid var(--line);
+    color:var(--muted);
+    border-radius:7px;
+    padding:5px 9px;
+    font-size:12.5px;
+    cursor:pointer;
+    font-family:var(--font-body);
+  }
+  button.ghost:hover{ border-color:var(--danger); color:var(--danger); }
+  button.add{
+    width:100%;
+    padding:9px;
+    border-radius:8px;
+    border:1px dashed var(--line);
+    background:transparent;
+    color:var(--accent);
+    font-weight:600;
+    font-size:13.5px;
+    cursor:pointer;
+    font-family:var(--font-body);
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-bottom:8px;
+  }
+  .tag{
+    background:linear-gradient(135deg, rgba(47,93,82,0.08), rgba(201,148,93,0.08));
+    border:1px solid rgba(47,93,82,0.18);
+    border-radius:999px;
+    padding:6px 10px 6px 12px;
+    font-size:13px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    color:var(--ink);
+  }
+  .tag button{
+    background:none;
+    border:none;
+    color:var(--muted);
+    cursor:pointer;
+    font-size:13px;
+    line-height:1;
+    opacity:0.8;
+  }
+  .actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:6px;
+  }
+  .actions button, .actions label.filebtn{
+    padding:10px 14px;
+    border-radius:10px;
+    font-size:13.5px;
+    font-weight:600;
+    cursor:pointer;
+    font-family:var(--font-body);
+    border:1px solid var(--line);
+    background:var(--card);
+    color:var(--ink);
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .actions button:hover, .actions label.filebtn:hover{
+    transform:translateY(-1px);
+    border-color:rgba(47,93,82,0.35);
+    box-shadow:0 8px 16px rgba(30,36,42,0.06);
+  }
+  .actions button.primary{
+    background:linear-gradient(135deg, var(--accent), #3d7269);
+    color:var(--accent-ink);
+    border-color:var(--accent);
+    box-shadow:0 10px 20px rgba(47,93,82,0.2);
+  }
+  #importFile{ display:none; }
+  .note{ font-size:12px; color:var(--muted); margin-top:8px; }
+
+  /* Preview / CV render */
+  .preview-wrap{ display:flex; justify-content:center; }
+  .cv-page{
+    --ink:#F4F4F0;
+    --muted:#C2C9CC;
+    --line:#444A4D;
+    --accent:#8FC8B8;
+    --accent-2:#DAB17D;
+    background:#000000;
+    color:var(--ink);
+    border:1px solid #333333;
+    border-radius:18px;
+    padding:clamp(22px,4vw,48px);
+    max-width:760px;
+    width:100%;
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+  }
+  .cv-page::before{
+    content:"";
+    position:absolute;
+    inset:0 auto auto 0;
+    width:160px;
+    height:160px;
+    background:linear-gradient(135deg, rgba(47,93,82,0.12), rgba(201,148,93,0.08));
+    border-radius:0 0 100% 0;
+    pointer-events:none;
+  }
+  .cv-name, .cv-title, .cv-contacts, .cv-summary, .cv-section{
+    position:relative;
+    z-index:1;
+  }
+  .cv-name{
+    font-family:var(--font-display);
+    font-size:clamp(28px,5vw,38px);
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.04em;
+  }
+  .cv-title{
+    color:var(--accent);
+    font-size:15px;
+    font-weight:700;
+    margin:8px 0 12px;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+  }
+  .cv-contacts{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 18px;
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:18px;
+    padding-bottom:16px;
+    border-bottom:1px solid var(--line);
+  }
+  .cv-summary{
+    font-size:14.5px;
+    color:var(--ink);
+    margin:0 0 22px;
+    max-width:70ch;
+    background:rgba(47,93,82,0.03);
+    border-left:3px solid var(--accent);
+    border-radius:0 10px 10px 0;
+    padding:12px 14px;
+  }
+  .cv-section{ margin-bottom:22px; }
+  .cv-section h2{
+    font-family:var(--font-display);
+    font-weight:500;
+    font-size:17px;
+    margin:0 0 10px;
+    padding-bottom:7px;
+    border-bottom:1px solid var(--line);
+    letter-spacing:0.02em;
+  }
+  .cv-item{ margin-bottom:14px; padding-left:12px; border-left:2px solid rgba(47,93,82,0.3); }
+  .cv-item:last-child{ margin-bottom:0; }
+  .cv-item-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:baseline;
+  }
+  .cv-item-role{ font-weight:700; font-size:14.5px; }
+  .cv-item-org{ color:var(--muted); font-size:13.5px; }
+  .cv-item-date{ font-size:12.5px; color:var(--muted); white-space:nowrap; }
+  .cv-item-desc{ font-size:13.5px; color:var(--ink); margin:6px 0 0; white-space:pre-line; }
+  .cv-skills{ display:flex; flex-wrap:wrap; gap:7px; }
+  .cv-skill{
+    font-size:12.5px;
+    padding:5px 11px;
+    border:1px solid rgba(47,93,82,0.2);
+    background:rgba(47,93,82,0.04);
+    border-radius:999px;
+    color:var(--ink);
+  }
+  .cv-lang-row{ display:flex; justify-content:space-between; font-size:13.5px; padding:4px 0; }
+  .cv-empty{ color:var(--muted); font-size:13.5px; font-style:italic; }
+
+  @media print{
+    header.top, .tabs, section.panel:first-of-type, .actions{ display:none !important; }
+    body{ background:#fff; }
+    .cv-page{
+      --ink:#1E242A;
+      --muted:#5F6C75;
+      --line:#E0D8CC;
+      --accent:#2F5D52;
+      --accent-2:#C9945D;
+      background:#fff;
+      color:var(--ink);
+      box-shadow:none;
+      border:none;
+      max-width:none;
+    }
+    main{ padding:0; display:block; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="header-row">
+    <div>
+      <h1 data-i18n="title">Mon CV</h1>
+      <p data-i18n="subtitle">Remplis tes informations à gauche, ton CV se met à jour à droite. Sauvegarde automatique dans ce navigateur, avec export possible en JSON ou CSV.</p>
+      <p id="connectedUserLabel" style="margin:8px 0 0; color:#dfe7eb; font-size:12px;">Compte connecté</p>
+    </div>
+    <div class="lang-wrap">
+      <label for="langSwitcher" data-i18n="languageLabel">Langue</label>
+      <select id="langSwitcher" aria-label="Choisir la langue">
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<div class="tabs">
+  <button id="tabForm" class="active" type="button">Formulaire</button>
+  <button id="tabPreview" type="button">Aperçu</button>
+</div>
+
+<main>
+  <section class="panel" id="formPanel">
+    <fieldset>
+      <legend data-i18n="personalInfo">Informations personnelles</legend>
+      <label class="first" for="p-first-name" data-i18n="firstName">Prénom</label>
+      <input type="text" id="p-first-name" data-personal="firstName" data-i18n-placeholder="firstNamePlaceholder" placeholder="Camille">
+      <label for="p-last-name" data-i18n="lastName">Nom</label>
+      <input type="text" id="p-last-name" data-personal="lastName" data-i18n-placeholder="lastNamePlaceholder" placeholder="Dupont">
+      <label for="p-marital-status" data-i18n="maritalStatus">Situation matrimoniale</label>
+      <select id="p-marital-status" data-personal="maritalStatus">
+        <option value="" data-i18n="maritalStatusUnspecified">Non précisée</option>
+        <option value="single" data-i18n="maritalSingle">Célibataire</option>
+        <option value="married" data-i18n="maritalMarried">Marié(e)</option>
+        <option value="divorced" data-i18n="maritalDivorced">Divorcé(e)</option>
+        <option value="widowed" data-i18n="maritalWidowed">Veuf/Veuve</option>
+        <option value="domestic-partnership" data-i18n="maritalDomesticPartnership">En union libre</option>
+      </select>
+      <label for="p-title" data-i18n="professionalTitle">Titre professionnel</label>
+      <input type="text" id="p-title" data-i18n-placeholder="titlePlaceholder" placeholder="Développeuse full-stack">
+      <div class="row2">
+        <div>
+          <label for="p-email" data-i18n="email">Email</label>
+          <input type="email" id="p-email" data-i18n-placeholder="emailPlaceholder" placeholder="camille@exemple.com">
+        </div>
+        <div>
+          <label for="p-country" data-i18n="country">Pays</label>
+          <select id="p-country"></select>
+        </div>
+      </div>
+      <div class="phone-row">
+        <div>
+          <label for="p-country-code" data-i18n="countryCode">Indicatif</label>
+          <input type="text" id="p-country-code" placeholder="+33" readonly>
+        </div>
+        <div>
+          <label for="p-phone" data-i18n="phone">Téléphone</label>
+          <input type="tel" id="p-phone" data-i18n-placeholder="phonePlaceholder" placeholder="06 12 34 56 78">
+        </div>
+      </div>
+      <div class="row2">
+        <div>
+          <label for="p-location" data-i18n="city">Ville</label>
+          <input type="text" id="p-location" data-i18n-placeholder="cityPlaceholder" placeholder="Lyon, France">
+        </div>
+        <div>
+          <label for="p-link" data-i18n="website">LinkedIn / site</label>
+          <input type="text" id="p-link" data-i18n-placeholder="websitePlaceholder" placeholder="linkedin.com/in/...">
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend data-i18n="privateIdentityTitle">Informations d’identité privées (facultatif)</legend>
+      <p class="note" data-i18n="privateIdentityNotice">Ces informations sont enregistrées localement dans ce navigateur, sans chiffrement, et ne figurent ni dans l’aperçu du CV ni dans les exports JSON/CSV. Évitez de les saisir sur un appareil partagé.</p>
+      <label class="first" for="p-nationality" data-i18n="nationality">Nationalité</label>
+      <input type="text" id="p-nationality" data-private-identity="nationality" data-i18n-placeholder="nationalityPlaceholder" placeholder="Française">
+      <label for="p-birth-date" data-i18n="birthDate">Date de naissance</label>
+      <input type="date" id="p-birth-date" data-private-identity="birthDate">
+      <label for="p-document-type" data-i18n="identityDocumentType">Type de pièce d’identité</label>
+      <select id="p-document-type" data-private-identity="documentType">
+        <option value="" data-i18n="documentTypeUnspecified">Non précisé</option>
+        <option value="national-id" data-i18n="documentTypeNationalId">Carte nationale d’identité</option>
+        <option value="passport" data-i18n="documentTypePassport">Passeport</option>
+        <option value="residence-permit" data-i18n="documentTypeResidencePermit">Titre de séjour</option>
+        <option value="other" data-i18n="documentTypeOther">Autre document</option>
+      </select>
+    </fieldset>
+
+    <fieldset>
+      <legend data-i18n="profile">Profil</legend>
+      <label class="first" for="p-summary" data-i18n="summaryLabel">Résumé en quelques phrases</label>
+      <textarea id="p-summary" data-i18n-placeholder="summaryPlaceholder" placeholder="Quelques lignes sur ton parcours et ce que tu recherches."></textarea>
+    </fieldset>
+
+    <fieldset>
+      <legend data-i18n="experienceTitle">Expérience professionnelle</legend>
+      <div id="expList"></div>
+      <button class="add" type="button" id="addExp" data-i18n="addExperience">+ Ajouter une expérience</button>
+    </fieldset>
+
+    <fieldset>
+      <legend data-i18n="educationTitle">Formation</legend>
+      <div id="eduList"></div>
+      <button class="add" type="button" id="addEdu" data-i18n="addEducation">+ Ajouter une formation</button>
+    </fieldset>
+
+    <fieldset>
+      <legend data-i18n="skillsTitle">Compétences</legend>
+      <div class="tags" id="skillTags"></div>
+      <input type="text" id="skillInput" data-i18n-placeholder="skillPlaceholder" placeholder="Écris une compétence puis appuie sur Entrée">
+    </fieldset>
+
+    <fieldset>
+      <legend data-i18n="languagesTitle">Langues</legend>
+      <div id="langList"></div>
+      <button class="add" type="button" id="addLang" data-i18n="addLanguage">+ Ajouter une langue</button>
+    </fieldset>
+
+    <div class="actions">
+      <button class="primary" type="button" id="btnPrint" data-i18n="printBtn">Imprimer / PDF</button>
+      <button type="button" id="btnExportJson" data-i18n="exportJson">Exporter en JSON</button>
+      <button type="button" id="btnExportCsv" data-i18n="exportCsv">Exporter en CSV</button>
+      <label class="filebtn" for="importFile" data-i18n="importJson">Importer un JSON</label>
+      <input type="file" id="importFile" accept="application/json">
+    </div>
+    <p class="note" id="downloadNote"></p>
+  </section>
+
+  <div class="preview-wrap" id="previewWrap">
+    <div class="cv-page" id="cvPage"></div>
+  </div>
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---------- state ----------
+  var state = {
+    personal:{ firstName:"", lastName:"", maritalStatus:"", title:"", email:"", phone:"", country:"FR", countryCode:"+33", location:"", link:"" },
+    privateIdentity:{ nationality:"", birthDate:"", documentType:"" },
+    summary:"",
+    experience:[],
+    education:[],
+    skills:[],
+    languages:[]
+  };
+
+  try {
+    var currentUser = JSON.parse(localStorage.getItem("cv_current_user_v1"));
+    if (!currentUser || !currentUser.email) {
+      window.location.href = "index.html";
+      return;
+    }
+    state.personal.email = currentUser.email;
+  } catch (e) {
+    window.location.href = "index.html";
+    return;
+  }
+
+  var currentLanguage = "fr";
+  var uidCounter = 1;
+  function uid(){ return "id" + (uidCounter++) + "-" + Math.random().toString(36).slice(2,7); }
+
+  var callingCountries = [
+    ["DZ","+213","af"],["AO","+244","af"],["BJ","+229","af"],["BW","+267","af"],["BF","+226","af"],["BI","+257","af"],["CV","+238","af"],["CM","+237","af"],["CF","+236","af"],["TD","+235","af"],["KM","+269","af"],["CG","+242","af"],["CD","+243","af"],["CI","+225","af"],["DJ","+253","af"],["EG","+20","af"],["GQ","+240","af"],["ER","+291","af"],["SZ","+268","af"],["ET","+251","af"],["GA","+241","af"],["GM","+220","af"],["GH","+233","af"],["GN","+224","af"],["GW","+245","af"],["KE","+254","af"],["LS","+266","af"],["LR","+231","af"],["LY","+218","af"],["MG","+261","af"],["MW","+265","af"],["ML","+223","af"],["MR","+222","af"],["MU","+230","af"],["YT","+262","af"],["MA","+212","af"],["MZ","+258","af"],["NA","+264","af"],["NE","+227","af"],["NG","+234","af"],["RE","+262","af"],["RW","+250","af"],["ST","+239","af"],["SN","+221","af"],["SC","+248","af"],["SL","+232","af"],["SO","+252","af"],["ZA","+27","af"],["SS","+211","af"],["SD","+249","af"],["TZ","+255","af"],["TG","+228","af"],["TN","+216","af"],["UG","+256","af"],["EH","+212","af"],["ZM","+260","af"],["ZW","+263","af"],
+    ["AF","+93","as"],["AM","+374","as"],["AZ","+994","as"],["BH","+973","as"],["BD","+880","as"],["BT","+975","as"],["BN","+673","as"],["KH","+855","as"],["CN","+86","as"],["CY","+357","as"],["GE","+995","as"],["HK","+852","as"],["IN","+91","as"],["ID","+62","as"],["IR","+98","as"],["IQ","+964","as"],["IL","+972","as"],["JP","+81","as"],["JO","+962","as"],["KZ","+7","as"],["KW","+965","as"],["KG","+996","as"],["LA","+856","as"],["LB","+961","as"],["MO","+853","as"],["MY","+60","as"],["MV","+960","as"],["MN","+976","as"],["MM","+95","as"],["NP","+977","as"],["KP","+850","as"],["OM","+968","as"],["PK","+92","as"],["PS","+970","as"],["PH","+63","as"],["QA","+974","as"],["SA","+966","as"],["SG","+65","as"],["KR","+82","as"],["LK","+94","as"],["SY","+963","as"],["TW","+886","as"],["TJ","+992","as"],["TH","+66","as"],["TL","+670","as"],["TR","+90","as"],["TM","+993","as"],["AE","+971","as"],["UZ","+998","as"],["VN","+84","as"],["YE","+967","as"],
+    ["AL","+355","eu"],["AD","+376","eu"],["AT","+43","eu"],["BY","+375","eu"],["BE","+32","eu"],["BA","+387","eu"],["BG","+359","eu"],["HR","+385","eu"],["CZ","+420","eu"],["DK","+45","eu"],["EE","+372","eu"],["FO","+298","eu"],["FI","+358","eu"],["FR","+33","eu"],["DE","+49","eu"],["GI","+350","eu"],["GR","+30","eu"],["GG","+44","eu"],["HU","+36","eu"],["IS","+354","eu"],["IE","+353","eu"],["IM","+44","eu"],["IT","+39","eu"],["JE","+44","eu"],["XK","+383","eu"],["LV","+371","eu"],["LI","+423","eu"],["LT","+370","eu"],["LU","+352","eu"],["MT","+356","eu"],["MD","+373","eu"],["MC","+377","eu"],["ME","+382","eu"],["NL","+31","eu"],["MK","+389","eu"],["NO","+47","eu"],["PL","+48","eu"],["PT","+351","eu"],["RO","+40","eu"],["RU","+7","eu"],["SM","+378","eu"],["RS","+381","eu"],["SK","+421","eu"],["SI","+386","eu"],["ES","+34","eu"],["SE","+46","eu"],["CH","+41","eu"],["UA","+380","eu"],["GB","+44","eu"],["VA","+39","eu"],["AX","+358","eu"],
+    ["AI","+1-264","na"],["AG","+1-268","na"],["AW","+297","na"],["BS","+1-242","na"],["BB","+1-246","na"],["BZ","+501","na"],["BM","+1-441","na"],["BQ","+599","na"],["VG","+1-284","na"],["CA","+1","na"],["KY","+1-345","na"],["CR","+506","na"],["CU","+53","na"],["CW","+599","na"],["DM","+1-767","na"],["DO","+1-809","na"],["SV","+503","na"],["GL","+299","na"],["GD","+1-473","na"],["GP","+590","na"],["GT","+502","na"],["HT","+509","na"],["HN","+504","na"],["JM","+1-876","na"],["MQ","+596","na"],["MX","+52","na"],["MS","+1-664","na"],["NI","+505","na"],["PA","+507","na"],["PR","+1-787","na"],["BL","+590","na"],["KN","+1-869","na"],["LC","+1-758","na"],["MF","+590","na"],["PM","+508","na"],["VC","+1-784","na"],["SX","+1-721","na"],["TT","+1-868","na"],["TC","+1-649","na"],["US","+1","na"],["VI","+1-340","na"],
+    ["AR","+54","sa"],["BO","+591","sa"],["BR","+55","sa"],["CL","+56","sa"],["CO","+57","sa"],["EC","+593","sa"],["FK","+500","sa"],["GF","+594","sa"],["GY","+592","sa"],["PY","+595","sa"],["PE","+51","sa"],["SR","+597","sa"],["UY","+598","sa"],["VE","+58","sa"],
+    ["AS","+1-684","oc"],["AU","+61","oc"],["CK","+682","oc"],["FJ","+679","oc"],["PF","+689","oc"],["GU","+1-671","oc"],["KI","+686","oc"],["MH","+692","oc"],["FM","+691","oc"],["NR","+674","oc"],["NC","+687","oc"],["NZ","+64","oc"],["NU","+683","oc"],["NF","+672","oc"],["MP","+1-670","oc"],["PW","+680","oc"],["PG","+675","oc"],["PN","+64","oc"],["WS","+685","oc"],["SB","+677","oc"],["TK","+690","oc"],["TO","+676","oc"],["TV","+688","oc"],["VU","+678","oc"],["WF","+681","oc"]
+  ];
+
+  var translations = {
+    fr: {
+      docTitle: "Mon Cv",
+      title: "Mon Cv",
+      subtitle: "Remplis tes informations à gauche, ton CV se met à jour à droite. Sauvegarde automatique dans ce navigateur, avec export possible en JSON ou CSV.",
+      downloadUnavailable: "Le téléchargement direct n'est pas disponible ici : utilise Imprimer / PDF.",
+      downloadFallback: "Le téléchargement direct n'est pas disponible ici : utilise Imprimer / PDF, ou copie les données affichées.",
+      languageLabel: "Langue",
+      personalInfo: "Informations personnelles",
+      firstName: "Prénom",
+      firstNamePlaceholder: "Camille",
+      lastName: "Nom",
+      lastNamePlaceholder: "Dupont",
+      maritalStatus: "Situation matrimoniale",
+      maritalStatusUnspecified: "Non précisée",
+      maritalSingle: "Célibataire",
+      maritalMarried: "Marié(e)",
+      maritalDivorced: "Divorcé(e)",
+      maritalWidowed: "Veuf/Veuve",
+      maritalDomesticPartnership: "En union libre",
+      privateIdentityTitle: "Informations d’identité privées (facultatif)",
+      privateIdentityNotice: "Ces informations sont enregistrées localement dans ce navigateur, sans chiffrement, et ne figurent ni dans l’aperçu du CV ni dans les exports JSON/CSV. Évitez de les saisir sur un appareil partagé.",
+      nationality: "Nationalité",
+      nationalityPlaceholder: "Française",
+      birthDate: "Date de naissance",
+      identityDocumentType: "Type de pièce d’identité",
+      documentTypeUnspecified: "Non précisé",
+      documentTypeNationalId: "Carte nationale d’identité",
+      documentTypePassport: "Passeport",
+      documentTypeResidencePermit: "Titre de séjour",
+      documentTypeOther: "Autre document",
+      professionalTitle: "Titre professionnel",
+      titlePlaceholder: "Développeuse full-stack",
+      email: "Email",
+      emailPlaceholder: "camille@exemple.com",
+      country: "Pays",
+      countryFrance: "France (+33)",
+      countryBelgium: "Belgique (+32)",
+      countrySwitzerland: "Suisse (+41)",
+      countryCanada: "Canada (+1)",
+      countryUsa: "États-Unis (+1)",
+      countryUk: "Royaume-Uni (+44)",
+      countryGermany: "Allemagne (+49)",
+      countryIvoryCoast: "Côte d'Ivoire (+225)",
+      countrySenegal: "Sénégal (+221)",
+      countryCameroon: "Cameroun (+237)",
+      countryMorocco: "Maroc (+212)",
+      countryTunisia: "Tunisie (+216)",
+      countrySouthAfrica: "Afrique du Sud (+27)",
+      countryAustralia: "Australie (+61)",
+      regionAfrica: "Afrique",
+      regionAsia: "Asie",
+      regionEurope: "Europe",
+      regionNorthAmerica: "Amérique du Nord",
+      regionSouthAmerica: "Amérique du Sud",
+      regionOceania: "Océanie",
+      countryCode: "Indicatif",
+      phone: "Téléphone",
+      phonePlaceholder: "06 12 34 56 78",
+      city: "Ville",
+      cityPlaceholder: "Lyon, France",
+      website: "LinkedIn / site",
+      websitePlaceholder: "linkedin.com/in/...",
+      profile: "Profil",
+      summaryLabel: "Résumé en quelques phrases",
+      summaryPlaceholder: "Quelques lignes sur ton parcours et ce que tu recherches.",
+      experienceTitle: "Expérience professionnelle",
+      addExperience: "+ Ajouter une expérience",
+      educationTitle: "Formation",
+      addEducation: "+ Ajouter une formation",
+      skillsTitle: "Compétences",
+      languagesTitle: "Langues",
+      addLanguage: "+ Ajouter une langue",
+      printBtn: "Imprimer / PDF",
+      exportJson: "Exporter en JSON",
+      exportCsv: "Exporter en CSV",
+      importJson: "Importer un JSON",
+      tabsForm: "Formulaire",
+      tabsPreview: "Aperçu",
+      drive: "Aucune expérience ajoutée pour l'instant.",
+      educationEmpty: "Aucune formation ajoutée pour l'instant.",
+      skillsEmpty: "Aucune compétence ajoutée pour l'instant.",
+      languagesEmpty: "Aucune langue ajoutée pour l'instant.",
+      yourName: "Ton nom",
+      sectionExperience: "Expérience professionnelle",
+      sectionEducation: "Formation",
+      sectionSkills: "Compétences",
+      sectionLanguages: "Langues",
+      remove: "Retirer",
+      role: "Poste",
+      organization: "Entreprise",
+      start: "Début",
+      end: "Fin",
+      current: "Poste actuel",
+      description: "Description",
+      descriptionPlaceholder: "Missions et réalisations principales",
+      degree: "Diplôme",
+      school: "Établissement",
+      language: "Langue",
+      level: "Niveau",
+      skillPlaceholder: "Écris une compétence puis appuie sur Entrée",
+      rolePlaceholder: "Chef de projet",
+      organizationPlaceholder: "Nom de l'entreprise",
+      degreePlaceholder: "Master en informatique",
+      schoolPlaceholder: "Nom de l'école",
+      languagePlaceholder: "Anglais",
+      present: "Présent",
+      defaultRole: "Poste",
+      defaultDegree: "Diplôme"
+    },
+    en: {
+      docTitle: "My CV",
+      title: "My CV",
+      subtitle: "Fill in your information on the left and your CV updates on the right. Automatically saved in this browser, with export to JSON or CSV.",
+      downloadUnavailable: "Direct downloads are not available here: use Print / PDF.",
+      downloadFallback: "Direct downloads are not available here: use Print / PDF, or copy the displayed data.",
+      languageLabel: "Language",
+      personalInfo: "Personal information",
+      firstName: "First name",
+      firstNamePlaceholder: "Camille",
+      lastName: "Last name",
+      lastNamePlaceholder: "Dupont",
+      maritalStatus: "Marital status",
+      maritalStatusUnspecified: "Not specified",
+      maritalSingle: "Single",
+      maritalMarried: "Married",
+      maritalDivorced: "Divorced",
+      maritalWidowed: "Widowed",
+      maritalDomesticPartnership: "Domestic partnership",
+      privateIdentityTitle: "Private identity details (optional)",
+      privateIdentityNotice: "This information is stored locally in this browser without encryption and is not included in the CV preview or JSON/CSV exports. Avoid entering it on a shared device.",
+      nationality: "Nationality",
+      nationalityPlaceholder: "French",
+      birthDate: "Date of birth",
+      identityDocumentType: "Identity document type",
+      documentTypeUnspecified: "Not specified",
+      documentTypeNationalId: "National identity card",
+      documentTypePassport: "Passport",
+      documentTypeResidencePermit: "Residence permit",
+      documentTypeOther: "Other document",
+      professionalTitle: "Professional title",
+      titlePlaceholder: "Full-stack developer",
+      email: "Email",
+      emailPlaceholder: "camille@example.com",
+      country: "Country",
+      countryFrance: "France (+33)",
+      countryBelgium: "Belgium (+32)",
+      countrySwitzerland: "Switzerland (+41)",
+      countryCanada: "Canada (+1)",
+      countryUsa: "United States (+1)",
+      countryUk: "United Kingdom (+44)",
+      countryGermany: "Germany (+49)",
+      countryIvoryCoast: "Côte d'Ivoire (+225)",
+      countrySenegal: "Senegal (+221)",
+      countryCameroon: "Cameroon (+237)",
+      countryMorocco: "Morocco (+212)",
+      countryTunisia: "Tunisia (+216)",
+      countrySouthAfrica: "South Africa (+27)",
+      countryAustralia: "Australia (+61)",
+      regionAfrica: "Africa",
+      regionAsia: "Asia",
+      regionEurope: "Europe",
+      regionNorthAmerica: "North America",
+      regionSouthAmerica: "South America",
+      regionOceania: "Oceania",
+      countryCode: "Dial code",
+      phone: "Phone",
+      phonePlaceholder: "+33 6 12 34 56 78",
+      city: "City",
+      cityPlaceholder: "Lyon, France",
+      website: "LinkedIn / website",
+      websitePlaceholder: "linkedin.com/in/...",
+      profile: "Profile",
+      summaryLabel: "Brief summary",
+      summaryPlaceholder: "A few lines about your background and what you are looking for.",
+      experienceTitle: "Professional experience",
+      addExperience: "+ Add experience",
+      educationTitle: "Education",
+      addEducation: "+ Add education",
+      skillsTitle: "Skills",
+      languagesTitle: "Languages",
+      addLanguage: "+ Add a language",
+      printBtn: "Print / PDF",
+      exportJson: "Export as JSON",
+      exportCsv: "Export as CSV",
+      importJson: "Import a JSON file",
+      tabsForm: "Form",
+      tabsPreview: "Preview",
+      drive: "No experience added yet.",
+      educationEmpty: "No education added yet.",
+      skillsEmpty: "No skills added yet.",
+      languagesEmpty: "No languages added yet.",
+      yourName: "Your name",
+      sectionExperience: "Professional experience",
+      sectionEducation: "Education",
+      sectionSkills: "Skills",
+      sectionLanguages: "Languages",
+      remove: "Remove",
+      role: "Role",
+      organization: "Company",
+      start: "Start",
+      end: "End",
+      current: "Current position",
+      description: "Description",
+      descriptionPlaceholder: "Main responsibilities and achievements",
+      degree: "Degree",
+      school: "School",
+      language: "Language",
+      level: "Level",
+      skillPlaceholder: "Type a skill and press Enter",
+      rolePlaceholder: "Project manager",
+      organizationPlaceholder: "Company name",
+      degreePlaceholder: "Master's degree in computer science",
+      schoolPlaceholder: "School name",
+      languagePlaceholder: "English",
+      present: "Present",
+      defaultRole: "Role",
+      defaultDegree: "Degree"
+    },
+    es: {
+      docTitle: "Mi CV",
+      title: "Mi CV",
+      subtitle: "Completa tu información a la izquierda y tu CV se actualizará a la derecha. Se guarda automáticamente en este navegador y puedes exportarlo a JSON o CSV.",
+      downloadUnavailable: "Las descargas directas no están disponibles aquí: usa Imprimir / PDF.",
+      downloadFallback: "Las descargas directas no están disponibles aquí: usa Imprimir / PDF o copia los datos mostrados.",
+      languageLabel: "Idioma",
+      personalInfo: "Información personal",
+      firstName: "Nombre",
+      firstNamePlaceholder: "Camila",
+      lastName: "Apellidos",
+      lastNamePlaceholder: "García",
+      maritalStatus: "Estado civil",
+      maritalStatusUnspecified: "Sin especificar",
+      maritalSingle: "Soltero/a",
+      maritalMarried: "Casado/a",
+      maritalDivorced: "Divorciado/a",
+      maritalWidowed: "Viudo/a",
+      maritalDomesticPartnership: "Unión libre",
+      privateIdentityTitle: "Datos de identidad privados (opcional)",
+      privateIdentityNotice: "Esta información se guarda localmente en este navegador, sin cifrado, y no aparece en la vista previa del CV ni en las exportaciones JSON/CSV. Evita introducirla en un dispositivo compartido.",
+      nationality: "Nacionalidad",
+      nationalityPlaceholder: "Española",
+      birthDate: "Fecha de nacimiento",
+      identityDocumentType: "Tipo de documento de identidad",
+      documentTypeUnspecified: "Sin especificar",
+      documentTypeNationalId: "Documento nacional de identidad",
+      documentTypePassport: "Pasaporte",
+      documentTypeResidencePermit: "Permiso de residencia",
+      documentTypeOther: "Otro documento",
+      professionalTitle: "Título profesional",
+      titlePlaceholder: "Desarrolladora full-stack",
+      email: "Correo electrónico",
+      emailPlaceholder: "camila@ejemplo.com",
+      country: "País",
+      countryFrance: "Francia (+33)",
+      countryBelgium: "Bélgica (+32)",
+      countrySwitzerland: "Suiza (+41)",
+      countryCanada: "Canadá (+1)",
+      countryUsa: "Estados Unidos (+1)",
+      countryUk: "Reino Unido (+44)",
+      countryGermany: "Alemania (+49)",
+      countryIvoryCoast: "Costa de Marfil (+225)",
+      countrySenegal: "Senegal (+221)",
+      countryCameroon: "Camerún (+237)",
+      countryMorocco: "Marruecos (+212)",
+      countryTunisia: "Túnez (+216)",
+      countrySouthAfrica: "Sudáfrica (+27)",
+      countryAustralia: "Australia (+61)",
+      regionAfrica: "África",
+      regionAsia: "Asia",
+      regionEurope: "Europa",
+      regionNorthAmerica: "América del Norte",
+      regionSouthAmerica: "América del Sur",
+      regionOceania: "Oceanía",
+      countryCode: "Código de país",
+      phone: "Teléfono",
+      phonePlaceholder: "+34 600 123 456",
+      city: "Ciudad",
+      cityPlaceholder: "Madrid, España",
+      website: "LinkedIn / sitio web",
+      websitePlaceholder: "linkedin.com/in/...",
+      profile: "Perfil",
+      summaryLabel: "Resumen breve",
+      summaryPlaceholder: "Unas líneas sobre tu trayectoria y lo que estás buscando.",
+      experienceTitle: "Experiencia profesional",
+      addExperience: "+ Añadir experiencia",
+      educationTitle: "Formación",
+      addEducation: "+ Añadir formación",
+      skillsTitle: "Habilidades",
+      languagesTitle: "Idiomas",
+      addLanguage: "+ Añadir idioma",
+      printBtn: "Imprimir / PDF",
+      exportJson: "Exportar como JSON",
+      exportCsv: "Exportar como CSV",
+      importJson: "Importar un archivo JSON",
+      tabsForm: "Formulario",
+      tabsPreview: "Vista previa",
+      drive: "Todavía no se ha añadido ninguna experiencia.",
+      educationEmpty: "Todavía no se ha añadido ninguna formación.",
+      skillsEmpty: "Todavía no se ha añadido ninguna habilidad.",
+      languagesEmpty: "Todavía no se ha añadido ningún idioma.",
+      yourName: "Tu nombre",
+      sectionExperience: "Experiencia profesional",
+      sectionEducation: "Formación",
+      sectionSkills: "Habilidades",
+      sectionLanguages: "Idiomas",
+      remove: "Eliminar",
+      role: "Puesto",
+      organization: "Empresa",
+      start: "Inicio",
+      end: "Fin",
+      current: "Puesto actual",
+      description: "Descripción",
+      descriptionPlaceholder: "Responsabilidades y logros principales",
+      degree: "Título",
+      school: "Centro educativo",
+      language: "Idioma",
+      level: "Nivel",
+      skillPlaceholder: "Escribe una habilidad y pulsa Intro",
+      rolePlaceholder: "Responsable de proyecto",
+      organizationPlaceholder: "Nombre de la empresa",
+      degreePlaceholder: "Máster en informática",
+      schoolPlaceholder: "Nombre del centro educativo",
+      languagePlaceholder: "Inglés",
+      present: "Actualidad",
+      defaultRole: "Puesto",
+      defaultDegree: "Título"
+    }
+  };
+
+  function t(key){
+    var dict = translations[currentLanguage] || translations.fr;
+    return dict[key] || translations.fr[key] || key;
+  }
+
+  function setStaticTexts(){
+    document.title = t("docTitle");
+    document.querySelectorAll("[data-i18n]").forEach(function(el){
+      var key = el.getAttribute("data-i18n");
+      if(t(key)) el.textContent = t(key);
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(function(el){
+      var key = el.getAttribute("data-i18n-placeholder");
+      if(t(key)) el.setAttribute("placeholder", t(key));
+    });
+    var tabForm = document.getElementById("tabForm");
+    var tabPreview = document.getElementById("tabPreview");
+    document.getElementById("langSwitcher").setAttribute("aria-label", t("languageLabel"));
+    renderCountryOptions();
+    if(downloadNoteMode) setDownloadNote(downloadNoteMode);
+    if(tabForm) tabForm.textContent = t("tabsForm");
+    if(tabPreview) tabPreview.textContent = t("tabsPreview");
+  }
+
+  function loadFromStorage(){
+    try{
+      var raw = localStorage.getItem("cv_data_v1");
+      if(raw){
+        var parsed = JSON.parse(raw);
+        var hasDocumentNumber = parsed.privateIdentity && Object.prototype.hasOwnProperty.call(parsed.privateIdentity, "documentNumber");
+        applyState(parsed);
+        if(hasDocumentNumber) saveToStorage();
+      }
+    }catch(e){ /* ignore, start blank */ }
+  }
+  function saveToStorage(){
+    try{ localStorage.setItem("cv_data_v1", JSON.stringify(state)); }catch(e){ /* ignore */ }
+  }
+
+  function applyState(obj){
+    if(!obj || typeof obj !== "object") return;
+    var personal = obj.personal || {};
+    state.personal = Object.assign({firstName:"",lastName:"",maritalStatus:"",title:"",email:"",phone:"",country:"FR",countryCode:"+33",location:"",link:""}, personal);
+    state.privateIdentity = Object.assign({nationality:"",birthDate:"",documentType:""}, obj.privateIdentity || {});
+    delete state.privateIdentity.documentNumber;
+    state.personal.country = resolveCountryCode(personal.country, state.personal.countryCode);
+    if(!personal.firstName && !personal.lastName && personal.name){
+      var legacyName = String(personal.name).trim().split(/\s+/);
+      state.personal.lastName = legacyName.pop() || "";
+      state.personal.firstName = legacyName.join(" ");
+    }
+    delete state.personal.name;
+    state.summary = obj.summary || "";
+    state.experience = Array.isArray(obj.experience) ? obj.experience.map(function(e){
+      return {id:uid(), role:e.role||"", org:e.org||"", start:e.start||"", end:e.end||"", current:!!e.current, desc:e.desc||""};
+    }) : [];
+    state.education = Array.isArray(obj.education) ? obj.education.map(function(e){
+      return {id:uid(), degree:e.degree||"", school:e.school||"", start:e.start||"", end:e.end||""};
+    }) : [];
+    state.skills = Array.isArray(obj.skills) ? obj.skills.slice() : [];
+    state.languages = Array.isArray(obj.languages) ? obj.languages.map(function(l){
+      return {id:uid(), name:l.name||"", level:l.level||"Intermédiaire"};
+    }) : [];
+  }
+
+  // ---------- helpers ----------
+  function escapeHtml(str){
+    return String(str||"").replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+    });
+  }
+  var countryNameCache = {};
+  function getCountryNameData(language){
+    if(countryNameCache[language]) return countryNameCache[language];
+    var data = {byIso:{},byNormalizedName:{}};
+    try{
+      var names = new Intl.DisplayNames([language], {type:"region"});
+      callingCountries.forEach(function(country){
+        var name = names.of(country[0]) || country[0];
+        data.byIso[country[0]] = name;
+        data.byNormalizedName[normalizeCountryName(name)] = country[0];
+      });
+    }catch(e){
+      callingCountries.forEach(function(country){
+        data.byIso[country[0]] = country[0];
+        data.byNormalizedName[normalizeCountryName(country[0])] = country[0];
+      });
+    }
+    countryNameCache[language] = data;
+    return data;
+  }
+  function countryDisplayName(countryIso, language){
+    return getCountryNameData(language || currentLanguage).byIso[countryIso] || countryIso;
+  }
+  function normalizeCountryName(name){
+    return String(name || "").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase().replace(/[^a-z0-9]/g,"");
+  }
+  function resolveCountryCode(savedCountry, dialCode){
+    var savedName = normalizeCountryName(savedCountry);
+    var match = callingCountries.find(function(country){ return country[0] === savedCountry; });
+    if(match) return match[0];
+    var countryFromName = ["en","fr","es"].map(function(language){
+      return getCountryNameData(language).byNormalizedName[savedName];
+    }).find(Boolean);
+    if(countryFromName) return countryFromName;
+    match = callingCountries.find(function(country){ return country[1] === dialCode; });
+    return match ? match[0] : "FR";
+  }
+  function countryLabel(country){
+    return countryDisplayName(country[0], currentLanguage) + " (" + country[1] + ")";
+  }
+  function renderCountryOptions(){
+    var select = document.getElementById("p-country");
+    var selectedCountry = state.personal.country || "FR";
+    var regionOrder = ["af","as","eu","na","sa","oc"];
+    var regionKeys = {af:"regionAfrica",as:"regionAsia",eu:"regionEurope",na:"regionNorthAmerica",sa:"regionSouthAmerica",oc:"regionOceania"};
+    select.textContent = "";
+    regionOrder.forEach(function(region){
+      var group = document.createElement("optgroup");
+      group.label = t(regionKeys[region]);
+      callingCountries.filter(function(country){ return country[2] === region; })
+        .sort(function(a,b){ return countryDisplayName(a[0],currentLanguage).localeCompare(countryDisplayName(b[0],currentLanguage),currentLanguage); })
+        .forEach(function(country){
+          var option = document.createElement("option");
+          option.value = country[0] + "|" + country[1];
+          option.textContent = countryLabel(country);
+          group.appendChild(option);
+        });
+      select.appendChild(group);
+    });
+    var selected = callingCountries.find(function(country){ return country[0] === selectedCountry; });
+    if(selected){
+      select.value = selected[0] + "|" + selected[1];
+      document.getElementById("p-country-code").value = selected[1];
+    }
+  }
+  function formatFirstName(value){
+    return String(value || "").toLocaleLowerCase("fr-FR").replace(/(^|[\s'’-])(\p{L})/gu, function(match, separator, letter){
+      return separator + letter.toLocaleUpperCase("fr-FR");
+    });
+  }
+  function formatLastName(value){
+    return String(value || "").toLocaleUpperCase("fr-FR");
+  }
+  function capitalizeInitial(value){
+    return String(value || "").replace(/(\S)/u, function(letter){
+      return letter.toLocaleUpperCase(currentLanguage);
+    });
+  }
+  function maritalStatusLabel(status){
+    var translationKeys = {
+      single:"maritalSingle",
+      married:"maritalMarried",
+      divorced:"maritalDivorced",
+      widowed:"maritalWidowed",
+      "domestic-partnership":"maritalDomesticPartnership"
+    };
+    return translationKeys[status] ? t(translationKeys[status]) : "";
+  }
+  function formatPhoneValue(personal){
+    var phone = (personal.phone || "").trim();
+    if(!phone) return "";
+    var code = (personal.countryCode || "+33").trim();
+    if(code && !phone.startsWith(code)) return code + " " + phone.trim();
+    return phone;
+  }
+  function monthLabel(v){
+    if(!v) return "";
+    var parts = v.split("-");
+    if(parts.length!==2) return v;
+    var months = ["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];
+    var idx = parseInt(parts[1],10)-1;
+    return (months[idx]||"") + " " + parts[0];
+  }
+
+  // ---------- rendering: form lists ----------
+  function renderExpList(){
+    var host = document.getElementById("expList");
+    host.innerHTML = "";
+    state.experience.forEach(function(exp, idx){
+      var div = document.createElement("div");
+      div.className = "entry";
+      div.innerHTML =
+        '<div class="entry-head"><span>' + t("sectionExperience") + ' ' + (idx+1) + '</span>' +
+        '<button class="ghost" type="button" data-remove-exp="' + exp.id + '">' + t("remove") + '</button></div>' +
+        '<label class="first">' + t("role") + '</label>' +
+        '<input type="text" data-exp="role" data-id="' + exp.id + '" value="' + escapeHtml(exp.role) + '" placeholder="' + escapeHtml(t("rolePlaceholder")) + '">' +
+        '<label>' + t("organization") + '</label>' +
+        '<input type="text" data-exp="org" data-id="' + exp.id + '" value="' + escapeHtml(exp.org) + '" placeholder="' + escapeHtml(t("organizationPlaceholder")) + '">' +
+        '<div class="row2">' +
+          '<div><label>' + t("start") + '</label><input type="month" data-exp="start" data-id="' + exp.id + '" value="' + escapeHtml(exp.start) + '"></div>' +
+          '<div><label>' + t("end") + '</label><input type="month" data-exp="end" data-id="' + exp.id + '" value="' + escapeHtml(exp.end) + '" ' + (exp.current?'disabled':'') + '></div>' +
+        '</div>' +
+        '<div class="checkbox-row"><input type="checkbox" data-exp="current" data-id="' + exp.id + '" ' + (exp.current?'checked':'') + '> ' + t("current") + '</div>' +
+        '<label>' + t("description") + '</label>' +
+        '        <textarea data-exp="desc" data-id="' + exp.id + '" placeholder="' + escapeHtml(t("descriptionPlaceholder")) + '">' + escapeHtml(exp.desc) + '</textarea>';
+      host.appendChild(div);
+    });
+  }
+
+  function renderEduList(){
+    var host = document.getElementById("eduList");
+    host.innerHTML = "";
+    state.education.forEach(function(ed, idx){
+      var div = document.createElement("div");
+      div.className = "entry";
+      div.innerHTML =
+        '<div class="entry-head"><span>' + t("sectionEducation") + ' ' + (idx+1) + '</span>' +
+        '<button class="ghost" type="button" data-remove-edu="' + ed.id + '">' + t("remove") + '</button></div>' +
+        '<label class="first">' + t("degree") + '</label>' +
+        '<input type="text" data-edu="degree" data-id="' + ed.id + '" value="' + escapeHtml(ed.degree) + '" placeholder="' + escapeHtml(t("degreePlaceholder")) + '">' +
+        '<label>' + t("school") + '</label>' +
+        '<input type="text" data-edu="school" data-id="' + ed.id + '" value="' + escapeHtml(ed.school) + '" placeholder="' + escapeHtml(t("schoolPlaceholder")) + '">' +
+        '<div class="row2">' +
+          '<div><label>' + t("start") + '</label><input type="month" data-edu="start" data-id="' + ed.id + '" value="' + escapeHtml(ed.start) + '"></div>' +
+          '<div><label>' + t("end") + '</label><input type="month" data-edu="end" data-id="' + ed.id + '" value="' + escapeHtml(ed.end) + '"></div>' +
+        '</div>';
+      host.appendChild(div);
+    });
+  }
+
+  function renderLangList(){
+    var host = document.getElementById("langList");
+    host.innerHTML = "";
+    state.languages.forEach(function(l, idx){
+      var div = document.createElement("div");
+      div.className = "entry";
+      div.innerHTML =
+        '<div class="entry-head"><span>' + t("language") + ' ' + (idx+1) + '</span>' +
+        '<button class="ghost" type="button" data-remove-lang="' + l.id + '">' + t("remove") + '</button></div>' +
+        '<label class="first">' + t("language") + '</label>' +
+        '<input type="text" data-lang="name" data-id="' + l.id + '" value="' + escapeHtml(l.name) + '" placeholder="' + escapeHtml(t("languagePlaceholder")) + '">' +
+        '<label>' + t("level") + '</label>' +
+        '<select data-lang="level" data-id="' + l.id + '">' +
+          ["Débutant","Intermédiaire","Courant","Bilingue","Langue maternelle"].map(function(opt){
+            return '<option ' + (l.level===opt?'selected':'') + '>' + opt + '</option>';
+          }).join("") +
+        '</select>';
+      host.appendChild(div);
+    });
+  }
+
+  function renderSkills(){
+    var host = document.getElementById("skillTags");
+    host.innerHTML = "";
+    state.skills.forEach(function(sk, idx){
+      var span = document.createElement("span");
+      span.className = "tag";
+      span.innerHTML = escapeHtml(sk) + ' <button type="button" data-remove-skill="' + idx + '">×</button>';
+      host.appendChild(span);
+    });
+  }
+
+  // ---------- rendering: CV preview ----------
+  function renderPreview(){
+    var p = state.personal;
+    var formattedPhone = formatPhoneValue(p);
+    var contacts = [p.email, formattedPhone, p.location, p.link].filter(Boolean).map(escapeHtml);
+    var maritalStatus = maritalStatusLabel(p.maritalStatus);
+    if(maritalStatus) contacts.push(escapeHtml(t("maritalStatus")) + ": " + escapeHtml(maritalStatus));
+
+    var expHtml = state.experience.length ? state.experience.map(function(e){
+      var dateRange = (monthLabel(e.start) || "") + " — " + (e.current ? t("present") : (monthLabel(e.end) || ""));
+      return '<div class="cv-item">' +
+        '<div class="cv-item-top">' +
+          '<div><span class="cv-item-role">' + escapeHtml(e.role || t("defaultRole")) + '</span>' +
+          (e.org ? ' <span class="cv-item-org">— ' + escapeHtml(e.org) + '</span>' : '') + '</div>' +
+          '<span class="cv-item-date">' + dateRange + '</span>' +
+        '</div>' +
+        (e.desc ? '<p class="cv-item-desc">' + escapeHtml(e.desc) + '</p>' : '') +
+      '</div>';
+    }).join("") : '<p class="cv-empty">' + t("drive") + '</p>';
+
+    var eduHtml = state.education.length ? state.education.map(function(e){
+      var dateRange = (monthLabel(e.start) || "") + " — " + (monthLabel(e.end) || "");
+      return '<div class="cv-item">' +
+        '<div class="cv-item-top">' +
+          '<div><span class="cv-item-role">' + escapeHtml(e.degree || t("defaultDegree")) + '</span>' +
+          (e.school ? ' <span class="cv-item-org">— ' + escapeHtml(e.school) + '</span>' : '') + '</div>' +
+          '<span class="cv-item-date">' + dateRange + '</span>' +
+        '</div>' +
+      '</div>';
+    }).join("") : '<p class="cv-empty">' + t("educationEmpty") + '</p>';
+
+    var skillsHtml = state.skills.length ? '<div class="cv-skills">' + state.skills.map(function(s){
+      return '<span class="cv-skill">' + escapeHtml(s) + '</span>';
+    }).join("") + '</div>' : '<p class="cv-empty">' + t("skillsEmpty") + '</p>';
+
+    var langHtml = state.languages.length ? state.languages.map(function(l){
+      return '<div class="cv-lang-row"><span>' + escapeHtml(l.name || t("language")) + '</span><span class="cv-item-date">' + escapeHtml(l.level) + '</span></div>';
+    }).join("") : '<p class="cv-empty">' + t("languagesEmpty") + '</p>';
+
+    document.getElementById("cvPage").innerHTML =
+      '<h1 class="cv-name">' + (escapeHtml([formatFirstName(p.firstName),formatLastName(p.lastName)].filter(Boolean).join(" ")) || t("yourName")) + '</h1>' +
+      (p.title ? '<div class="cv-title">' + escapeHtml(p.title) + '</div>' : '') +
+      (contacts.length ? '<div class="cv-contacts">' + contacts.map(function(c){ return '<span>' + c + '</span>'; }).join("") + '</div>' : '') +
+      (state.summary ? '<p class="cv-summary">' + escapeHtml(state.summary) + '</p>' : '') +
+      '<div class="cv-section"><h2>' + t("sectionExperience") + '</h2>' + expHtml + '</div>' +
+      '<div class="cv-section"><h2>' + t("sectionEducation") + '</h2>' + eduHtml + '</div>' +
+      '<div class="cv-section"><h2>' + t("sectionSkills") + '</h2>' + skillsHtml + '</div>' +
+      '<div class="cv-section"><h2>' + t("sectionLanguages") + '</h2>' + langHtml + '</div>';
+  }
+
+  function renderAll(){
+    var connectedUser = null;
+    try { connectedUser = JSON.parse(localStorage.getItem("cv_current_user_v1")); } catch (e) {}
+    var label = document.getElementById("connectedUserLabel");
+    if (label && connectedUser && connectedUser.email) {
+      label.textContent = "Compte connecté : " + connectedUser.email;
+    }
+    renderExpList();
+    renderEduList();
+    renderLangList();
+    renderSkills();
+    renderPreview();
+  }
+
+  function syncFormFromState(){
+    document.getElementById("p-first-name").value = state.personal.firstName;
+    document.getElementById("p-last-name").value = state.personal.lastName;
+    document.getElementById("p-marital-status").value = state.personal.maritalStatus || "";
+    document.getElementById("p-nationality").value = state.privateIdentity.nationality;
+    document.getElementById("p-birth-date").value = state.privateIdentity.birthDate;
+    document.getElementById("p-document-type").value = state.privateIdentity.documentType;
+    var now = new Date();
+    document.getElementById("p-birth-date").max = [now.getFullYear(),String(now.getMonth()+1).padStart(2,"0"),String(now.getDate()).padStart(2,"0")].join("-");
+    document.getElementById("p-title").value = state.personal.title;
+    document.getElementById("p-email").value = state.personal.email;
+    document.getElementById("p-phone").value = state.personal.phone;
+    document.getElementById("p-country-code").value = state.personal.countryCode || "+33";
+    renderCountryOptions();
+    document.getElementById("p-location").value = state.personal.location;
+    document.getElementById("p-link").value = state.personal.link;
+    document.getElementById("p-summary").value = state.summary;
+  }
+
+  function commitAndSave(){
+    saveToStorage();
+    renderPreview();
+  }
+
+  function applyLanguage(lang){
+    currentLanguage = lang;
+    document.documentElement.lang = lang;
+    document.getElementById("langSwitcher").value = lang;
+    setStaticTexts();
+    renderAll();
+  }
+
+  // ---------- personal & summary bindings ----------
+  ["p-first-name","p-last-name","p-title","p-email","p-phone","p-location","p-link"].forEach(function(id){
+    document.getElementById(id).addEventListener("input", function(){
+      var key = this.getAttribute("data-personal") || id.replace("p-","");
+      state.personal[key] = this.value;
+      commitAndSave();
+    });
+  });
+  ["p-first-name","p-last-name"].forEach(function(id){
+    document.getElementById(id).addEventListener("blur", function(){
+      var key = this.getAttribute("data-personal");
+      this.value = key === "firstName" ? formatFirstName(this.value) : formatLastName(this.value);
+      state.personal[key] = this.value;
+      commitAndSave();
+    });
+  });
+  document.getElementById("p-marital-status").addEventListener("change", function(){
+    state.personal.maritalStatus = this.value;
+    commitAndSave();
+  });
+  ["p-nationality","p-birth-date","p-document-type"].forEach(function(id){
+    var input = document.getElementById(id);
+    input.addEventListener(input.tagName === "SELECT" ? "change" : "input", function(){
+      state.privateIdentity[this.getAttribute("data-private-identity")] = this.value;
+      saveToStorage();
+    });
+  });
+  document.getElementById("p-nationality").addEventListener("input", function(){
+    var cursor = this.selectionStart;
+    var formatted = capitalizeInitial(this.value);
+    if(formatted !== this.value){
+      this.value = formatted;
+      this.setSelectionRange(cursor, cursor);
+    }
+    state.privateIdentity.nationality = this.value;
+    saveToStorage();
+  });
+  document.getElementById("p-country").addEventListener("change", function(){
+    var parts = this.value.split("|");
+    state.personal.country = parts[0];
+    state.personal.countryCode = parts[1];
+    document.getElementById("p-country-code").value = parts[1];
+    commitAndSave();
+  });
+  document.getElementById("p-summary").addEventListener("input", function(){
+    state.summary = this.value;
+    commitAndSave();
+  });
+  document.getElementById("langSwitcher").addEventListener("change", function(){
+    applyLanguage(this.value);
+  });
+
+  // ---------- experience ----------
+  document.getElementById("addExp").addEventListener("click", function(){
+    state.experience.push({id:uid(), role:"", org:"", start:"", end:"", current:false, desc:""});
+    renderExpList();
+    commitAndSave();
+  });
+  document.getElementById("expList").addEventListener("input", function(ev){
+    var t = ev.target;
+    var field = t.getAttribute("data-exp");
+    if(!field) return;
+    var id = t.getAttribute("data-id");
+    var item = state.experience.find(function(e){ return e.id===id; });
+    if(!item) return;
+    if(field==="current"){
+      item.current = t.checked;
+      renderExpList();
+    } else {
+      item[field] = t.value;
+    }
+    commitAndSave();
+  });
+  document.getElementById("expList").addEventListener("click", function(ev){
+    var id = ev.target.getAttribute("data-remove-exp");
+    if(!id) return;
+    state.experience = state.experience.filter(function(e){ return e.id!==id; });
+    renderExpList();
+    commitAndSave();
+  });
+
+  // ---------- education ----------
+  document.getElementById("addEdu").addEventListener("click", function(){
+    state.education.push({id:uid(), degree:"", school:"", start:"", end:""});
+    renderEduList();
+    commitAndSave();
+  });
+  document.getElementById("eduList").addEventListener("input", function(ev){
+    var t = ev.target;
+    var field = t.getAttribute("data-edu");
+    if(!field) return;
+    var id = t.getAttribute("data-id");
+    var item = state.education.find(function(e){ return e.id===id; });
+    if(!item) return;
+    item[field] = t.value;
+    commitAndSave();
+  });
+  document.getElementById("eduList").addEventListener("click", function(ev){
+    var id = ev.target.getAttribute("data-remove-edu");
+    if(!id) return;
+    state.education = state.education.filter(function(e){ return e.id!==id; });
+    renderEduList();
+    commitAndSave();
+  });
+
+  // ---------- languages ----------
+  document.getElementById("addLang").addEventListener("click", function(){
+    state.languages.push({id:uid(), name:"", level:"Intermédiaire"});
+    renderLangList();
+    commitAndSave();
+  });
+  document.getElementById("langList").addEventListener("input", function(ev){
+    var t = ev.target;
+    var field = t.getAttribute("data-lang");
+    if(!field) return;
+    var id = t.getAttribute("data-id");
+    var item = state.languages.find(function(e){ return e.id===id; });
+    if(!item) return;
+    item[field] = t.value;
+    commitAndSave();
+  });
+  document.getElementById("langList").addEventListener("click", function(ev){
+    var id = ev.target.getAttribute("data-remove-lang");
+    if(!id) return;
+    state.languages = state.languages.filter(function(e){ return e.id!==id; });
+    renderLangList();
+    commitAndSave();
+  });
+
+  // ---------- skills ----------
+  document.getElementById("skillInput").addEventListener("keydown", function(ev){
+    if(ev.key==="Enter"){
+      ev.preventDefault();
+      var v = this.value.trim();
+      if(v){
+        state.skills.push(v);
+        this.value = "";
+        renderSkills();
+        commitAndSave();
+      }
+    }
+  });
+  document.getElementById("skillTags").addEventListener("click", function(ev){
+    var idxAttr = ev.target.getAttribute("data-remove-skill");
+    if(idxAttr===null) return;
+    state.skills.splice(parseInt(idxAttr,10),1);
+    renderSkills();
+    commitAndSave();
+  });
+
+  // ---------- tabs (mobile) ----------
+  var tabForm = document.getElementById("tabForm");
+  var tabPreview = document.getElementById("tabPreview");
+  var formPanel = document.getElementById("formPanel");
+  var previewWrap = document.getElementById("previewWrap");
+  tabForm.addEventListener("click", function(){
+    tabForm.classList.add("active"); tabPreview.classList.remove("active");
+    formPanel.classList.remove("hidden"); previewWrap.classList.add("hidden");
+  });
+  tabPreview.addEventListener("click", function(){
+    tabPreview.classList.add("active"); tabForm.classList.remove("active");
+    previewWrap.classList.remove("hidden"); formPanel.classList.add("hidden");
+  });
+
+  // ---------- print ----------
+  document.getElementById("btnPrint").addEventListener("click", function(){
+    // ensure preview is visible before printing on mobile
+    previewWrap.classList.remove("hidden");
+    window.print();
+  });
+
+  // ---------- import ----------
+  document.getElementById("importFile").addEventListener("change", function(ev){
+    var file = ev.target.files && ev.target.files[0];
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(){
+      try{
+        var obj = JSON.parse(reader.result);
+        applyState(obj);
+        syncFormFromState();
+        renderAll();
+        saveToStorage();
+      }catch(e){
+        alert("Ce fichier ne semble pas être un export JSON valide.");
+      }
+      ev.target.value = "";
+    };
+    reader.readAsText(file);
+  });
+
+  // ---------- CSV export ----------
+  function csvEscape(v){
+    var s = String(v==null?"":v);
+    if(/[",\n]/.test(s)) s = '"' + s.replace(/"/g,'""') + '"';
+    return s;
+  }
+  function buildCsv(){
+    var rows = [["Section","Champ","Valeur"]];
+    var p = state.personal;
+    rows.push(["Personnel","Prénom",formatFirstName(p.firstName)]);
+    rows.push(["Personnel","Nom",formatLastName(p.lastName)]);
+    if(p.maritalStatus) rows.push(["Personnel",t("maritalStatus"),maritalStatusLabel(p.maritalStatus)]);
+    rows.push(["Personnel","Titre",p.title]);
+    rows.push(["Personnel","Email",p.email]);
+    rows.push(["Personnel","Pays",countryDisplayName(p.country,currentLanguage)]);
+    rows.push(["Personnel","Indicatif",p.countryCode]);
+    rows.push(["Personnel","Téléphone",p.phone]);
+    rows.push(["Personnel","Ville",p.location]);
+    rows.push(["Personnel","LinkedIn / site",p.link]);
+    rows.push(["Profil","Résumé",state.summary]);
+    state.experience.forEach(function(e, i){
+      var n = "Expérience " + (i+1);
+      rows.push([n,"Poste",e.role]);
+      rows.push([n,"Entreprise",e.org]);
+      rows.push([n,"Début",e.start]);
+      rows.push([n,"Fin",e.current?"Présent":e.end]);
+      rows.push([n,"Description",e.desc]);
+    });
+    state.education.forEach(function(e, i){
+      var n = "Formation " + (i+1);
+      rows.push([n,"Diplôme",e.degree]);
+      rows.push([n,"Établissement",e.school]);
+      rows.push([n,"Début",e.start]);
+      rows.push([n,"Fin",e.end]);
+    });
+    state.skills.forEach(function(s, i){
+      rows.push(["Compétence " + (i+1), "Valeur", s]);
+    });
+    state.languages.forEach(function(l, i){
+      var n = "Langue " + (i+1);
+      rows.push([n,"Nom",l.name]);
+      rows.push([n,"Niveau",l.level]);
+    });
+    return rows.map(function(r){ return r.map(csvEscape).join(","); }).join("\r\n");
+  }
+
+  // ---------- downloads capability ----------
+  var downloadsNS = null;
+  var downloadNoteMode = null;
+  function setDownloadNote(mode){
+    downloadNoteMode = mode;
+    document.getElementById("downloadNote").textContent = t(mode === "fallback" ? "downloadFallback" : "downloadUnavailable");
+  }
+  (function initDownloads(){
+    try{
+      if(window.claude && typeof window.claude.use === "function"){
+        window.claude.use("downloads").then(function(ns){
+          downloadsNS = ns;
+          if(!downloadsNS){
+            setDownloadNote("fallback");
+          }
+        }).catch(function(){
+          downloadsNS = null;
+          setDownloadNote("unavailable");
+        });
+      } else {
+        setDownloadNote("unavailable");
+      }
+    }catch(e){
+      downloadsNS = null;
+      setDownloadNote("unavailable");
+    }
+  })();
+
+  function handleDownloadError(err){
+    if(!err || !err.code){ return; }
+    if(err.code === "declined"){ return; }
+    if(err.code === "rate_limited"){ alert("Un autre téléchargement est déjà en cours, réessaie dans un instant."); return; }
+    alert("Le téléchargement n'a pas pu aboutir ici. Essaie Imprimer / PDF à la place.");
+  }
+
+  document.getElementById("btnExportJson").addEventListener("click", function(){
+    if(!downloadsNS){ alert("Le téléchargement direct n'est pas disponible ici."); return; }
+    var exportState = Object.assign({}, state);
+    delete exportState.privateIdentity;
+    var data = JSON.stringify(exportState, null, 2);
+    downloadsNS.save({filename:"cv.json", data:data}).catch(handleDownloadError);
+  });
+  document.getElementById("btnExportCsv").addEventListener("click", function(){
+    if(!downloadsNS){ alert("Le téléchargement direct n'est pas disponible ici."); return; }
+    var data = buildCsv();
+    downloadsNS.save({filename:"cv.csv", data:data}).catch(handleDownloadError);
+  });
+
+  // ---------- init ----------
+  loadFromStorage();
+  syncFormFromState();
+  applyLanguage(currentLanguage);
+  renderAll();
+})();
+</script>
+</body>
+</html>

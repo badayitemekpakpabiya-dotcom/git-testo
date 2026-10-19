@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}{{ profile.full_name }} — CVBase{% endblock %}
+
+{% block content %}
+<div class="public-profile">
+    <h1>{{ profile.full_name }}</h1>
+    <p class="job-title">{{ profile.job_title or "" }}</p>
+
+    <div class="contact-info">
+        {% if profile.phone %}<span>📞 {{ profile.phone }}</span>{% endif %}
+        {% if profile.address %}<span>📍 {{ profile.address }}</span>{% endif %}
+        {% if profile.linkedin %}<span>🔗 <a href="{{ profile.linkedin }}" target="_blank">Lien</a></span>{% endif %}
+    </div>
+
+    {% if profile.summary %}
+        <section>
+            <h2>Résumé</h2>
+            <p>{{ profile.summary }}</p>
+        </section>
+    {% endif %}
+
+    {% if profile.experience %}
+        <section>
+            <h2>Expérience</h2>
+            <p style="white-space: pre-line;">{{ profile.experience }}</p>
+        </section>
+    {% endif %}
+
+    {% if profile.education %}
+        <section>
+            <h2>Formation</h2>
+            <p style="white-space: pre-line;">{{ profile.education }}</p>
+        </section>
+    {% endif %}
+
+    {% if profile.skills %}
+        <section>
+            <h2>Compétences</h2>
+            <div class="skills-list">
+                {% for skill in profile.skills.split(',') %}
+                    {% if skill.strip() %}<span class="skill-tag">{{ skill.strip() }}</span>{% endif %}
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+</div>
+{% endblock %}

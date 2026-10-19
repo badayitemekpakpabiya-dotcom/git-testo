@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Accueil — CVBase{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Créez, connectez-vous et publiez votre CV</h1>
+    <p>Chaque utilisateur crée un compte, se connecte à son espace personnel, remplit son profil et accède ensuite à l’éditeur de CV pour bâtir son dossier professionnel.</p>
+    {% if not current_user.is_authenticated %}
+        <div class="hero-actions">
+            <a href="{{ url_for('register') }}" class="btn-primary">Créer mon compte</a>
+            <a href="{{ url_for('login') }}" class="btn-secondary">Se connecter</a>
+        </div>
+    {% else %}
+        <div class="hero-actions">
+            <a href="{{ url_for('editor') }}" class="btn-primary">Ouvrir mon CV</a>
+            <a href="{{ url_for('dashboard') }}" class="btn-secondary">Mon tableau de bord</a>
+        </div>
+    {% endif %}
+</section>
+
+<section class="feature-grid">
+    <article class="info-card">
+        <h2>Étape 1 : créer un compte</h2>
+        <p>Un utilisateur s’inscrit avec une adresse e-mail et un mot de passe.</p>
+    </article>
+    <article class="info-card">
+        <h2>Étape 2 : se connecter</h2>
+        <p>À chaque retour, il se reconnecte à sa plateforme pour modifier ou créer un nouveau CV.</p>
+    </article>
+    <article class="info-card">
+        <h2>Étape 3 : éditer le CV</h2>
+        <p>L’utilisateur accède à l’éditeur, remplit ses informations et génère un profil public.</p>
+    </article>
+</section>
+
+<section>
+    <h2>Profils récents</h2>
+    {% if profiles %}
+        <div class="card-grid">
+            {% for p in profiles %}
+                <a class="card" href="{{ url_for('view_public_profile', user_id=p.user_id) }}">
+                    <h3>{{ p.full_name }}</h3>
+                    <p class="muted">{{ p.job_title or "Poste non renseigné" }}</p>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="muted">Aucun profil publié pour le moment. Soyez le premier !</p>
+    {% endif %}
+</section>
+{% endblock %}

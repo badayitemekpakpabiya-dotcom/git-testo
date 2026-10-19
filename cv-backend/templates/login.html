@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Connexion — CVBase{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <h1>Connexion</h1>
+    <form method="POST">
+        <label for="username">Nom d'utilisateur ou email</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit" class="btn-primary">Se connecter</button>
+    </form>
+
+    <div class="social-login">
+        <a href="{{ url_for('social_auth', provider='google') }}" class="social-btn">Continuer avec Google</a>
+        <a href="{{ url_for('social_auth', provider='microsoft') }}" class="social-btn">Continuer avec Microsoft</a>
+    </div>
+
+    <p class="muted"><a href="{{ url_for('forgot_password') }}">Mot de passe oublié ?</a></p>
+    <p class="muted">Pas encore de compte ? <a href="{{ url_for('register') }}">Inscrivez-vous</a></p>
+</div>
+{% endblock %}

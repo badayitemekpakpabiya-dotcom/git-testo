@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Tableau de bord — CVBase{% endblock %}
+
+{% block content %}
+<h1>Bonjour, {{ current_user.username }} 👋</h1>
+
+<div class="dashboard-grid">
+    <div class="panel">
+        <h2>Aperçu du profil</h2>
+        {% if profile and profile.full_name %}
+            <p><strong>{{ profile.full_name }}</strong></p>
+            <p class="muted">{{ profile.job_title or "" }}</p>
+            <p>{{ profile.summary or "Aucun résumé renseigné." }}</p>
+        {% else %}
+            <p class="muted">Votre profil n'est pas encore complété.</p>
+        {% endif %}
+        <a href="{{ url_for('profile') }}" class="btn-secondary">Modifier mon profil</a>
+    </div>
+
+    <div class="panel">
+        <h2>Mon CV</h2>
+        {% if profile and profile.cv_filename %}
+            <p>Fichier actuel : {{ profile.cv_filename }}</p>
+            <a href="{{ url_for('uploaded_file', filename=profile.cv_filename) }}" class="btn-secondary">Télécharger mon CV</a>
+        {% else %}
+            <p class="muted">Aucun CV téléversé.</p>
+            <a href="{{ url_for('profile') }}" class="btn-secondary">Ajouter mon CV</a>
+        {% endif %}
+    </div>
+
+    <div class="panel">
+        <h2>Lien public</h2>
+        {% if profile and profile.full_name %}
+            <p class="muted">Partagez ce lien avec les recruteurs :</p>
+            <code>{{ url_for('view_public_profile', user_id=current_user.id, _external=True) }}</code>
+        {% else %}
+            <p class="muted">Complétez votre profil pour générer un lien public.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

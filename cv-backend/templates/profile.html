@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Mon profil — CVBase{% endblock %}
+
+{% block content %}
+<div class="form-card wide">
+    <h1>Mes informations professionnelles</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-row">
+            <div>
+                <label for="full_name">Nom complet</label>
+                <input type="text" id="full_name" name="full_name" value="{{ profile.full_name or '' }}" required>
+            </div>
+            <div>
+                <label for="job_title">Titre / Poste recherché</label>
+                <input type="text" id="job_title" name="job_title" value="{{ profile.job_title or '' }}">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div>
+                <label for="phone">Téléphone</label>
+                <input type="text" id="phone" name="phone" value="{{ profile.phone or '' }}">
+            </div>
+            <div>
+                <label for="address">Adresse / Ville</label>
+                <input type="text" id="address" name="address" value="{{ profile.address or '' }}">
+            </div>
+        </div>
+
+        <label for="linkedin">Lien LinkedIn / Portfolio</label>
+        <input type="text" id="linkedin" name="linkedin" value="{{ profile.linkedin or '' }}">
+
+        <label for="summary">Résumé professionnel</label>
+        <textarea id="summary" name="summary" rows="3">{{ profile.summary or '' }}</textarea>
+
+        <label for="experience">Expérience professionnelle</label>
+        <textarea id="experience" name="experience" rows="5" placeholder="Ex: 2022-2024 : Développeur chez X — description...">{{ profile.experience or '' }}</textarea>
+
+        <label for="education">Formation</label>
+        <textarea id="education" name="education" rows="3" placeholder="Ex: 2020 : Licence en informatique — Université Y">{{ profile.education or '' }}</textarea>
+
+        <label for="skills">Compétences (séparées par des virgules)</label>
+        <textarea id="skills" name="skills" rows="2" placeholder="Python, Gestion de projet, Communication...">{{ profile.skills or '' }}</textarea>
+
+        <label for="cv_file">Téléverser mon CV (PDF, DOC, DOCX — 5 Mo max)</label>
+        <input type="file" id="cv_file" name="cv_file" accept=".pdf,.doc,.docx">
+        {% if profile.cv_filename %}
+            <p class="muted">Fichier actuel : {{ profile.cv_filename }}</p>
+        {% endif %}
+
+        <button type="submit" class="btn-primary">Enregistrer</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon CV — Accès sécurisé</title>
+  <style>
+    :root {
+      --bg: #f4f0ea;
+      --panel: #ffffff;
+      --panel-alt: #f8f5f1;
+      --ink: #1d2429;
+      --muted: #66737d;
+      --line: #e4dccb;
+      --accent: #2f5d52;
+      --accent-2: #c9945d;
+      --success: #1d8a5f;
+      --danger: #b24d4d;
+      --shadow: 0 18px 42px rgba(28, 36, 42, 0.1);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #f7f5f0 0%, var(--bg) 100%);
+      color: var(--ink);
+    }
+    a { color: var(--accent); text-decoration: none; }
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+    .hero {
+      background: linear-gradient(90deg, rgba(0,0,0,0.96), rgba(0,0,0,0.82) 45%, rgba(0,0,0,0.36)),
+                  url('emploi-header.svg') center/cover no-repeat;
+      color: #fff;
+      border-radius: 24px;
+      padding: 46px 38px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      font-family: Georgia, serif;
+      letter-spacing: -0.04em;
+    }
+    .hero p {
+      max-width: 750px;
+      margin: 0;
+      color: #dfe7eb;
+      font-size: 1.04rem;
+      line-height: 1.6;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      margin-top: 28px;
+      align-items: start;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+    .panel-title {
+      margin: 0 0 18px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .feature-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+    .feature-list li {
+      background: var(--panel-alt);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      color: var(--ink);
+    }
+    .auth-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--line);
+      background: #f9f6f2;
+    }
+    .tab {
+      border: none;
+      background: transparent;
+      padding: 16px 18px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .tab.active {
+      background: var(--accent);
+      color: #fff;
+    }
+    .tab-pane {
+      display: none;
+      padding: 22px 22px 18px;
+    }
+    .tab-pane.active {
+      display: block;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: clamp(1.5rem, 2vw, 2rem);
+      font-family: Georgia, serif;
+      letter-spacing: -0.04em;
+    }
+    label {
+      display: block;
+      margin: 12px 0 7px;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+    input:focus {
+      outline: 2px solid rgba(47, 93, 82, 0.25);
+      border-color: var(--accent);
+    }
+    .btn {
+      margin-top: 16px;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      padding: 13px 16px;
+      background: linear-gradient(135deg, var(--accent), #3a7066);
+      color: white;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn.secondary {
+      background: var(--panel-alt);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+    .social-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .social-btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 10px;
+      padding: 11px 12px;
+      cursor: not-allowed;
+      color: var(--muted);
+      font-weight: 700;
+      opacity: 0.8;
+    }
+    .status {
+      margin-top: 16px;
+      font-size: 0.92rem;
+      color: var(--muted);
+      min-height: 18px;
+    }
+    .status.error { color: var(--danger); }
+    .status.success { color: var(--success); }
+    .session-box {
+      margin-top: 18px;
+      background: #eef7f3;
+      border: 1px solid rgba(47, 93, 82, 0.2);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: none;
+    }
+    .session-box strong { display: block; margin-bottom: 8px; }
+    .session-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .session-actions button {
+      flex: 1;
+    }
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; }
+      .social-row { grid-template-columns: 1fr; }
+      .hero { padding: 34px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <h1>Mon CV</h1>
+      <p>
+        Créez un compte, connectez-vous à votre espace personnel, puis ouvrez l’éditeur de CV pour créer,
+        modifier et réutiliser un profil professionnel à chaque fois.
+      </p>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <div class="panel-title">Pourquoi cette étape est utile</div>
+        <ul class="feature-list">
+          <li>Chaque utilisateur dispose d’un compte personnel.</li>
+          <li>Il peut créer et enregistrer son CV en toute sécurité.</li>
+          <li>Il peut se reconnecter plus tard pour modifier ou refaire un nouveau CV.</li>
+          <li>La page de création est protégée et ne s’ouvre qu’après connexion.</li>
+        </ul>
+      </section>
+
+      <section class="auth-box">
+        <div class="tabs">
+          <button class="tab active" type="button" data-target="login-pane">Se connecter</button>
+          <button class="tab" type="button" data-target="signup-pane">Créer un compte</button>
+        </div>
+
+        <div class="tab-pane active" id="login-pane">
+          <h2>Connexion</h2>
+          <form id="loginForm">
+            <label for="loginEmail">Adresse e-mail</label>
+            <input id="loginEmail" type="email" placeholder="prenom@exemple.com" required />
+
+            <label for="loginPassword">Mot de passe</label>
+            <input id="loginPassword" type="password" placeholder="Votre mot de passe" required />
+
+            <button class="btn" type="submit">Accéder à mon CV</button>
+          </form>
+        </div>
+
+        <div class="tab-pane" id="signup-pane">
+          <h2>Créer un compte</h2>
+          <form id="signupForm">
+            <label for="signupName">Nom complet</label>
+            <input id="signupName" type="text" placeholder="Votre nom complet" required />
+
+            <label for="signupEmail">Adresse e-mail</label>
+            <input id="signupEmail" type="email" placeholder="prenom@exemple.com" required />
+
+            <label for="signupPassword">Mot de passe</label>
+            <input id="signupPassword" type="password" placeholder="Créez un mot de passe" required />
+
+            <label for="signupPasswordConfirm">Confirmer le mot de passe</label>
+            <input id="signupPasswordConfirm" type="password" placeholder="Confirmez votre mot de passe" required />
+
+            <button class="btn" type="submit">Créer mon compte</button>
+          </form>
+        </div>
+
+        <div class="social-row">
+          <button class="social-btn" type="button" disabled>Google</button>
+          <button class="social-btn" type="button" disabled>Microsoft</button>
+        </div>
+
+        <div class="status" id="authStatus"></div>
+
+        <div class="session-box" id="sessionBox">
+          <strong>Compte actif</strong>
+          <div id="sessionEmail"></div>
+          <div class="session-actions">
+            <button class="btn secondary" type="button" id="continueBtn">Continuer</button>
+            <button class="btn secondary" type="button" id="logoutBtn">Se déconnecter</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const USERS_KEY = 'cv_users_v1';
+    const CURRENT_KEY = 'cv_current_user_v1';
+    const authStatus = document.getElementById('authStatus');
+    const sessionBox = document.getElementById('sessionBox');
+    const sessionEmail = document.getElementById('sessionEmail');
+
+    function setStatus(message, type) {
+      authStatus.textContent = message;
+      authStatus.className = 'status ' + (type || '');
+    }
+
+    function getUsers() {
+      try {
+        return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveUsers(users) {
+      localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    }
+
+    function getCurrentUser() {
+      try {
+        return JSON.parse(localStorage.getItem(CURRENT_KEY));
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function setCurrentUser(user) {
+      localStorage.setItem(CURRENT_KEY, JSON.stringify(user));
+    }
+
+    function clearCurrentUser() {
+      localStorage.removeItem(CURRENT_KEY);
+    }
+
+    function showSession(user) {
+      if (!user || !user.email) return;
+      sessionEmail.textContent = 'E-mail connecté : ' + user.email;
+      sessionBox.style.display = 'block';
+    }
+
+    function hideSession() {
+      sessionBox.style.display = 'none';
+    }
+
+    document.querySelectorAll('.tab').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.tab').forEach(function(tab) {
+          tab.classList.toggle('active', tab === btn);
+        });
+        document.querySelectorAll('.tab-pane').forEach(function(panel) {
+          panel.classList.toggle('active', panel.id === btn.dataset.target);
+        });
+      });
+    });
+
+    const currentUser = getCurrentUser();
+    if (currentUser && currentUser.email) {
+      showSession(currentUser);
+      setStatus('Vous êtes déjà connecté. Vous pouvez continuer vers votre CV.', 'success');
+    }
+
+    document.getElementById('continueBtn').addEventListener('click', function() {
+      window.location.href = 'KOKO.html';
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      clearCurrentUser();
+      hideSession();
+      setStatus('Vous avez bien été déconnecté.', 'success');
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const name = document.getElementById('signupName').value.trim();
+      const email = document.getElementById('signupEmail').value.trim().toLowerCase();
+      const password = document.getElementById('signupPassword').value;
+      const confirm = document.getElementById('signupPasswordConfirm').value;
+
+      if (!name || !email || !password) {
+        setStatus('Tous les champs sont requis.', 'error');
+        return;
+      }
+      if (password.length < 6) {
+        setStatus('Le mot de passe doit contenir au moins 6 caractères.', 'error');
+        return;
+      }
+      if (password !== confirm) {
+        setStatus('Les mots de passe ne correspondent pas.', 'error');
+        return;
+      }
+
+      const users = getUsers();
+      const exists = users.some(function(user) { return user.email === email; });
+      if (exists) {
+        setStatus('Cet e-mail est déjà utilisé. Essayez de vous connecter.', 'error');
+        return;
+      }
+
+      const newUser = { name: name, email: email, password: password };
+      users.push(newUser);
+      saveUsers(users);
+      setCurrentUser(newUser);
+      showSession(newUser);
+      setStatus('Compte créé avec succès. Redirection vers votre CV...', 'success');
+
+      setTimeout(function() {
+        window.location.href = 'KOKO.html';
+      }, 600);
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+      const password = document.getElementById('loginPassword').value;
+
+      if (!email || !password) {
+        setStatus('Veuillez renseigner votre e-mail et votre mot de passe.', 'error');
+        return;
+      }
+
+      const users = getUsers();
+      const user = users.find(function(item) {
+        return item.email === email && item.password === password;
+      });
+
+      if (!user) {
+        setStatus('Identifiants incorrects. Vérifiez votre compte ou créez-en un nouveau.', 'error');
+        return;
+      }
+
+      setCurrentUser(user);
+      showSession(user);
+      setStatus('Connexion réussie. Redirection vers votre CV...', 'success');
+
+      setTimeout(function() {
+        window.location.href = 'KOKO.html';
+      }, 600);
+    });
+  </script>
+</body>
+</html>

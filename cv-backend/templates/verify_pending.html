@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Vérification requise — CVBase{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <h1>Vérification de votre compte</h1>
+    <p>Un lien de vérification a été généré pour votre adresse e-mail lors de votre inscription.</p>
+    <p class="muted">Cliquez sur le lien reçu pour activer votre compte, puis revenez sur cette page pour vous connecter.</p>
+    <a href="{{ url_for('login') }}" class="btn-primary">Retour à la connexion</a>
+</div>
+{% endblock %}
